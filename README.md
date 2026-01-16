@@ -155,6 +155,17 @@ docker compose logs -f
 
 数据存储在 `./data` 目录中，包括 SQLite 数据库文件。备份时请备份此目录。
 
+## 🔌 Augment Code 配套使用
+
+本项目可配合魔改版 Augment-BYOK 插件使用，实现在 Augment Code 中使用自定义 API 端点。
+
+👉 **使用教程**: [飞书文档](https://tcn1dv9putrz.feishu.cn/wiki/NfNEwWkGuiWhNJkHFdRcfXrPnn1)
+🔑 **访问密码**: `734&Q851`
+
+## 🙏 鸣谢
+
+- [Augment-BYOK](https://github.com/AnkRoot/Augment-BYOK) - 本插件基于此项目进行魔改，感谢原作者的开源贡献
+
 ## License
 
 MIT License
