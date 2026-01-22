@@ -2,9 +2,15 @@
 
 🚀 将 Kiro 等 IDE 转换为兼容 OpenAI/Claude/Augment Code 格式的 API 服务。
 
+## 🎉 V2.1.0 更新说明
+
+### 新增功能
+
+- 🌐 **Warp 渠道支持** - 新增 Warp 渠道，支持 OpenAI 对话格式（暂不支持 Claude 协议）
+
 ## 🎉 V2.0.0 更新说明
 
-> ⚠️ **重要提示**: 
+> ⚠️ **重要提示**:
 > 1. 更新到 V2.0.0 版本及以后，AugmentCode 插件需要重新下载安装！
 > 2. API 端点格式已变更为 `http://localhost:8000/{渠道}/v1`，如 `/kiro/v1` 或 `/antigravity/v1`
 
@@ -19,7 +25,9 @@
 
 - 🚀 **Augment Code 支持** - 完美支持反代 Augment Code，已处理大部分兼容性问题
 - 🔄 **多协议支持** - 同时支持 Claude `/v1/messages` 和 OpenAI `/v1/chat/completions` 端点
-- 🌌 **多渠道支持** - 支持 Kiro 和 Antigravity 双渠道，可独立管理
+- 🌌 **多渠道支持** - 支持 Kiro、Antigravity 和 Warp 三渠道，可独立管理
+  - **Claude 协议**: 仅支持 Kiro 和 Antigravity 渠道
+  - **OpenAI 格式**: 所有渠道均支持
 - 🌐 **代理池支持** - 支持 HTTP/HTTPS/SOCKS5 代理，可按渠道配置独立代理
 - 🔑 **Session 派生** - 代理地址支持 `%s` 占位符，自动替换为账号唯一 Session ID，实现 IP 隔离
 - ⚖️ **负载均衡** - 多账号随机分配，自动跳过异常账号
@@ -34,84 +42,6 @@
 <img src="home2.png" alt="Augment2API 首页">
 <br>
 
-## 📡 API 端点
-
-API 地址格式：`http://localhost:8000/{渠道}/v1`
-
-| 渠道 | API 地址 |
-|------|----------|
-| Kiro | `http://localhost:8000/kiro/v1` |
-| Antigravity | `http://localhost:8000/antigravity/v1` |
-
-### Claude 协议 (`/{渠道}/v1/messages`)
-
-```bash
-# Kiro 渠道
-curl -X POST http://localhost:8000/kiro/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: YOUR_API_KEY" \
-  -d '{
-    "model": "claude-sonnet-4-20250514",
-    "max_tokens": 4096,
-    "stream": true,
-    "messages": [
-      {
-        "role": "user",
-        "content": "Hello, who are you?"
-      }
-    ]
-  }'
-
-# Antigravity 渠道
-curl -X POST http://localhost:8000/antigravity/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: YOUR_API_KEY" \
-  -d '{
-    "model": "claude-sonnet-4-20250514",
-    "max_tokens": 4096,
-    "stream": true,
-    "messages": [
-      {
-        "role": "user",
-        "content": "Hello, who are you?"
-      }
-    ]
-  }'
-```
-
-### OpenAI 协议 (`/{渠道}/v1/chat/completions`)
-
-```bash
-# Kiro 渠道
-curl -X POST http://localhost:8000/kiro/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -d '{
-    "model": "claude-sonnet-4-20250514",
-    "stream": true,
-    "messages": [
-      {
-        "role": "user",
-        "content": "Hello, who are you?"
-      }
-    ]
-  }'
-
-# Antigravity 渠道
-curl -X POST http://localhost:8000/antigravity/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -d '{
-    "model": "claude-sonnet-4-20250514",
-    "stream": true,
-    "messages": [
-      {
-        "role": "user",
-        "content": "Hello, who are you?"
-      }
-    ]
-  }'
-```
 
 ## 快速开始
 
@@ -166,11 +96,6 @@ database:
   default:
     type: "sqlite"
     link: "sqlite:./data/augment.db"  # 数据库路径
-
-augment:
-  apiTarget: "https://q.us-east-1.amazonaws.com"
-  authTarget: "https://prod.us-east-1.auth.desktop.kiro.dev"
-  version: "0.8.0"
 ```
 
 ## 目录结构
