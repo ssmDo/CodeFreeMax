@@ -1,12 +1,19 @@
 # CodeFreeMax 部署指南
 
-🚀 将 Kiro、Antigravity、Warp、Orchids等 IDE 转换为兼容 OpenAI/Claude/Augment Code 格式的 API 服务。
+🚀 将 Kiro、Antigravity、Warp、Orchids 等 IDE 转换为兼容 OpenAI/Claude/Augment Code 格式的 API 服务。
 
-## 🎉 V2.1.8 更新说明
+## 🎉 V2.2.0 更新说明
 
 > ⚠️ **重要提示**:
-> 1. 必须拉本仓库最新的代码部署 否则无法启动
-> 2. 公共授权码 144bd7a0-6ca2-4b7e-ac1c-1a29afb50662
+> 1. 公共授权码：`144bd7a0-6ca2-4b7e-ac1c-1a29afb50662`
+
+### 新增功能
+
+- 🌐 **Warp Claude 协议支持** - Warp 渠道现已支持 Claude 协议，功能更完整
+- 🌸 **Orchids 协议完全重构** - 全面重构 Orchids 协议实现，性能和稳定性大幅提升
+- 🎨 **前端界面重构** - 全新的管理界面，操作更直观，体验更流畅
+
+## 🎉 V2.1.8 更新说明
 
 ### 新增功能
 
@@ -16,7 +23,7 @@
 
 ### 新增功能
 
-- 🌐 **Warp 渠道支持** - 新增 Warp 渠道，支持 OpenAI 对话格式（暂不支持 Claude 协议）
+- 🌐 **Warp 渠道支持** - 新增 Warp 渠道，支持 OpenAI 对话格式
 
 ## 🎉 V2.0.0 更新说明
 
