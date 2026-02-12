@@ -2,17 +2,10 @@
 
 set -e
 
+BETA_IMAGE="ssmdo/codefreemax:beta"
+
 command_exists() {
     command -v "$1" >/dev/null 2>&1
-}
-
-image_exists() {
-    local image_name=$1
-    if docker image inspect "$image_name" >/dev/null 2>&1; then
-        return 0
-    else
-        return 1
-    fi
 }
 
 get_compose_cmd() {
@@ -29,9 +22,17 @@ compose_cmd=$(get_compose_cmd)
 
 if [ "$compose_cmd" = "none" ]; then
     echo "Error: Neither 'docker compose' nor 'docker-compose' is available."
-    echo "Please install Docker with Compose plugin or standalone docker-compose."
     exit 1
 fi
 
-$compose_cmd pull kiro2api
-$compose_cmd up -d --remove-orphans
+echo "==> Pulling beta image: $BETA_IMAGE"
+docker pull "$BETA_IMAGE"
+
+echo "==> Stopping current container..."
+$compose_cmd down
+
+echo "==> Starting with beta image..."
+DOCKER_IMAGE="$BETA_IMAGE" $compose_cmd up -d --force-recreate --remove-orphans
+
+echo "==> Done! Current image:"
+docker inspect --format='{{.Config.Image}}' codefreemax 2>/dev/null || echo "(container not yet running)"

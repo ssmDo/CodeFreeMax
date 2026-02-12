@@ -1,21 +1,24 @@
 version: '3.8'
 
 services:
-  kiro2api:
-    image: ${DOCKER_IMAGE:-ssmdo/kiro2api:latest}
-    container_name: kiro2api
+  codefreemax:
+    image: ${DOCKER_IMAGE:-ssmdo/codefreemax:latest}
+    container_name: codefreemax
     restart: unless-stopped
     ports:
-      - "${PORT:-8000}:8000"
+      - "${PORT:-8877}:8000"
     volumes:
-      - ./config.yaml:/app/manifest/config/config.yaml:ro
+      - ./config.yaml:/app/config.yaml:ro
       - ./data:/app/data
     environment:
       - TZ=Asia/Shanghai
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8000/health"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8000/api/version"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -23,7 +26,7 @@ services:
 
   redis:
     image: redis:alpine
-    container_name: kiro2api-redis
+    container_name: cfm-client-redis
     restart: unless-stopped
     volumes:
       - redis-data:/data
@@ -34,6 +37,24 @@ services:
       timeout: 5s
       retries: 3
 
+  mysql:
+    image: mysql:8.0
+    container_name: cfm-client-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: codefreemax
+      MYSQL_DATABASE: kiro_client
+      TZ: Asia/Shanghai
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
 volumes:
   redis-data:
-
+  mysql-data:

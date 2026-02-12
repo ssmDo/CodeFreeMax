@@ -1,23 +1,21 @@
-# https://goframe.org/docs/web/server-config-file-template
 server:
-  address: ":8000"
-  # openapiPath: "/api.json"
-  # swaggerPath: "/swagger"
+  port: 8000
+  host: "0.0.0.0"
 
-# https://goframe.org/docs/core/glog-config
-logger:
-  level: "all"
-  stdout: true
-
-# https://goframe.org/docs/core/gdb-config-file
-database:
-  default:
-    type: "sqlite"
-    link: "sqlite:./data/kiro.db"
-
-# Redis 配置（用于请求计数）
 redis:
-  addr: "kiro2api-redis:6379"
+  addr: "redis:6379"
   password: ""
   db: 0
 
+admin:
+  password: "admin123"
+  api_key: ""
+
+db:
+  type: "mysql"
+  mysql:
+    host: "mysql"
+    port: 3306
+    user: "root"
+    password: "codefreemax"
+    name: "kiro_client"

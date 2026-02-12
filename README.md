@@ -1,16 +1,8 @@
 # CodeFreeMax
 
-> ⚠️ **关于 Token 安全性的说明**
+> 🎉 **v3.0.0 Beta 已发布！**
 >
-> 近期有用户在 L 站反馈称本程序存在「偷取用户 Token」的行为，在此做出统一回应：
->
-> 本程序对用户 Token 的处理方式为 **服务端加密存储**，相关操作仅用于防止程序被破解/逆向，属于正常的安全防护措施，**并非窃取用户 Token**。
->
-> 如果不放心，GitHub 上有人提供了本程序的 **去授权版**，可以直接免授权使用。
->
-> 此外，**v3.0.0 全新 PaaS 架构即将上线**，账号数据仍由本地管理，但 Token 将通过接入点进行转发。如果你对此仍有顾虑，也可以选择不购买/不使用，我们完全尊重你的选择。
->
-> ⚠️ **本程序后续将不再提供任何免费服务。**
+> 全新 PaaS 架构正式上线，请拉取最新仓库重新部署。默认端口已更改为 **8877**，不会与之前的程序冲突，可放心部署。
 
 🚀 将 Kiro、Antigravity、Warp、Orchids、Grok 等 IDE/服务转换为兼容 OpenAI / Claude / Augment Code 格式的 API 服务。
 
@@ -29,7 +21,7 @@
 | ClaudeCode | ✅ | — | ❌ | 仅支持 Claude 协议 |
 | Grok | — | ✅ | ✅ | 纯 OpenAI 协议 |
 
-- API 端点格式：`http://localhost:8000/{渠道}/v1`，如 `/kiro/v1`、`/antigravity/v1`
+- API 端点格式：`http://localhost:8877/{渠道}/v1`，如 `/kiro/v1`、`/antigravity/v1`
 
 ### 核心能力
 
@@ -43,17 +35,6 @@
 - 📋 **模型管理** — 自定义模型列表、名称映射、启用/禁用、排序
 - 💾 **数据持久化** — SQLite 存储，方便备份迁移
 - 🎨 **管理界面** — 全新前端界面，操作直观
-
-## 项目展示
-
-<img src="img/v1.png" alt="CodeFreeMax 界面展示 1">
-<br>
-<img src="img/v2.png" alt="CodeFreeMax 界面展示 2">
-<br>
-<img src="img/v3.png" alt="CodeFreeMax 界面展示 3">
-<br>
-<img src="img/v4.png" alt="CodeFreeMax 界面展示 4">
-<br>
 
 ## 快速开始
 
@@ -95,14 +76,14 @@ docker compose ps
 DOCKER_IMAGE=ssmdo/kiro2api:latest
 
 # 服务端口
-PORT=8000
+PORT=8877
 ```
 
 ### config.yaml 文件
 
 ```yaml
 server:
-  address: ":8000"  # 服务监听地址
+  address: ":8877"  # 服务监听地址
 
 database:
   default:
@@ -155,20 +136,12 @@ docker compose logs -f
 
 本项目可配合魔改版 Augment-BYOK 插件使用，实现在 Augment Code 中使用自定义 API 端点。
 
-> ⚠️ **V2.3.0 用户注意**: 更新到 V2.3.0 后，插件需要更新到 v3.0.0 才能使用上下文压缩功能！
-
 👉 **使用教程**: [飞书文档](https://tcn1dv9putrz.feishu.cn/wiki/NfNEwWkGuiWhNJkHFdRcfXrPnn1)
 🔑 **访问密码**: `734&Q851`
 
 ## 🙏 鸣谢
 
 - [Augment-BYOK](https://github.com/AnkRoot/Augment-BYOK) - 本插件基于此项目进行魔改，感谢原作者的开源贡献
-
-## ☕ 捐赠
-
-如果这个项目对你有帮助，欢迎请作者喝杯咖啡 ☕
-
-<img src="wx.jpg" alt="微信赞赏码" width="200">
 
 ## License
 
